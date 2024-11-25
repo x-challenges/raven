@@ -1,0 +1,12 @@
+aws:
+  endpoint:
+    url: https://message-queue.api.cloud.yandex.net
+    region: ru-central1
+
+queue:
+  consumers:
+    test:
+      client: test
+      backend:
+        sqs:
+          url: https://message-queue.api.cloud.yandex.net/b1gcm11knnnopur9fil6/dj600000002g4tig02le/app-events
