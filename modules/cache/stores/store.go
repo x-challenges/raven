@@ -72,6 +72,9 @@ func (f *Factory) Store(options *Options) (Store, error) {
 		fallthrough
 	default:
 		kind = Memory
+		options = &Options{
+			Memory: &memoryOptions{},
+		}
 	}
 
 	if builder, exist = f.builders[kind]; exist {
