@@ -1,0 +1,30 @@
+{
+    "messages": [
+        {
+            "details": {
+                "message": {
+                    "attributes": {
+                        "ApproximateFirstReceiveTimestamp": "1732621454536",
+                        "ApproximateReceiveCount": "1",
+                        "SenderId": "ajeioqpmit81hs7mknbm@as",
+                        "SentTimestamp": "1732621454070"
+                    },
+                    "body": "some body",
+                    "md5_of_body": "328c30fae61cd119cd177c061d1ac11f",
+                    "md5_of_message_attributes": "",
+                    "message_attributes": {},
+                    "message_id": "7de91715-5022fe7a-6a789845-972c9e07"
+                },
+                "queue_id": "yrn:yc:ymq:ru-central1:b1geh60n3c7r5614b2h8:test"
+            },
+            "event_metadata": {
+                "cloud_id": "b1gcm11knnnopur9fil6",
+                "created_at": "2024-11-26T11:44:14.070Z",
+                "event_id": "7de91715-5022fe7a-6a789845-972c9e07",
+                "event_type": "yandex.cloud.events.messagequeue.QueueMessage",
+                "folder_id": "b1geh60n3c7r5614b2h8",
+                "tracing_context": null
+            }
+        }
+    ]
+}

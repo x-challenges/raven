@@ -1,0 +1,17 @@
+{
+    "messages": [
+        {
+            "details": {
+                "payload": "{\"payload\": \"test\"}",
+                "trigger_id": "a1s4ddmr7nc6segjirtv"
+            },
+            "event_metadata": {
+                "cloud_id": "b1gcm11knnnopur9fil6",
+                "created_at": "2024-11-26T11:07:04.956953484Z",
+                "event_id": "a1s7t9gmroeue7fisrfg",
+                "event_type": "yandex.cloud.events.serverless.triggers.TimerMessage",
+                "folder_id": "b1geh60n3c7r5614b2h8"
+            }
+        }
+    ]
+}
