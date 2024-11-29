@@ -14,6 +14,9 @@ type ID = string
 // DateTime
 type DateTime = time.Time
 
+// String
+type String = string
+
 /*
 	YDB support
 
