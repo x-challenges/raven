@@ -57,11 +57,19 @@ func In[T FilteredCommon](field string, values []T) FilterOperator {
 	}
 }
 
-// Has Json filter
+// HasJson
 func HasJSON[T FilteredCommon](field string, value T) FilterOperator {
 	return func(query *gorm.DB) *gorm.DB {
 		// TODO: gotm has some problems with ? and @ escaping ...
 		return query.Where(`JSON_EXISTS(` + field + `, '$[*] ? (@ == "` + fmt.Sprintf("%v", value) + `")')`)
+	}
+}
+
+// ExistJson
+func ExistJSON[T FilteredCommon](field string, expr string, values []T) FilterOperator {
+	return func(query *gorm.DB) *gorm.DB {
+		// TODO: gotm has some problems with ? and @ escaping ...
+		return query.Where(`JSON_VALUE(`+field+`, '`+expr+`') IN ?`, values)
 	}
 }
 
