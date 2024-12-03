@@ -71,19 +71,31 @@ func Inject[W Worker[T], T JobArgs](builder interface{}) fx.Option {
 		),
 
 		fx.Invoke(
-			func(mux *asynqpkg.ServeMux, scheduler *asynqpkg.Scheduler, w Worker[T]) error {
+			func(
+				logger *zap.Logger,
+				mux *asynqpkg.ServeMux,
+				scheduler *asynqpkg.Scheduler,
+				errors *asynq.ErrorHandlers,
+				worker Worker[T],
+			) error {
 				var (
-					task    = newAsynqTask(w, []byte("{}"))
-					options = newAsynqOptionFromWorker(w)
-					handler = newAsynqHandlerFn(w)
-					err     error
+					task          = newAsynqTask(worker, []byte("{}"))
+					options       = newAsynqOptionFromWorker(worker)
+					workerHandler = newAsynqHandlerFunc(worker)
+					errorHandler  = newAsynqErrorHandlerFunc(logger, worker)
+					err           error
 				)
 
 				// register worker as a task handler
-				mux.HandleFunc(task.Type(), handler)
+				mux.HandleFunc(task.Type(), workerHandler)
+
+				// register worker error handler
+				if err = errors.Register(task, errorHandler); err != nil {
+					return err
+				}
 
 				// register worker as a scheduler task
-				if w, ok := w.(WorkerCron[JobArgs]); ok {
+				if w, ok := worker.(WorkerCron[JobArgs]); ok {
 					if _, err = scheduler.Register(w.Cronspec(), task, options...); err != nil {
 						return err
 					}

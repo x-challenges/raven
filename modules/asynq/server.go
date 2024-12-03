@@ -11,7 +11,12 @@ import (
 	"github.com/x-challenges/raven/modules/worker"
 )
 
-func NewServer(logger *zap.Logger, client redis.UniversalClient, config *Config) (*asynq.Server, error) {
+func NewServer(
+	logger *zap.Logger,
+	client redis.UniversalClient,
+	config *Config,
+	errors *ErrorHandlers,
+) (*asynq.Server, error) {
 	var (
 		opts = asynq.Config{
 			Logger:          logger.Sugar(),
@@ -19,6 +24,7 @@ func NewServer(logger *zap.Logger, client redis.UniversalClient, config *Config)
 			Queues:          config.Asynq.Server.Queues,
 			StrictPriority:  config.Asynq.Server.StrictPriority,
 			ShutdownTimeout: config.Asynq.Server.Shutdown.Timeout,
+			ErrorHandler:    errors,
 		}
 	)
 

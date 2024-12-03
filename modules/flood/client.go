@@ -25,7 +25,7 @@ type client struct {
 	client *asynq.Client
 }
 
-// newClient
+// NewClient
 func newClient(logger *zap.Logger, asynq *asynq.Client) *client {
 	return &client{
 		logger: logger,

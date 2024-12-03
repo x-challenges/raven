@@ -2,10 +2,12 @@ package flood
 
 import "time"
 
+// Config
 type Config struct {
 	Flood struct{} `mapstructure:"flood"`
 }
 
+// Flood
 type Flood struct {
 	Worker struct {
 		Queue    string        `mapstructure:"queue" default:"default"`

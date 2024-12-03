@@ -1,9 +1,11 @@
 package flood
 
+// JobArgs
 type JobArgs interface {
 	Kind() string
 }
 
+// JobMeta
 type JobMeta struct {
 	TenantID string `json:"tenant_id,omitempty"`
 	TaskID   string `json:"task_id,omitempty"`
@@ -12,13 +14,15 @@ type JobMeta struct {
 	Queue    string `json:"queue,omitempty"`
 }
 
+// WrappedJobArgs
 type wrappedJobArgs[T JobArgs] struct {
-	Args T       `json:"args,omitempty"`
 	Meta JobMeta `json:"meta,omitempty"`
+	Args T       `json:"args,omitempty"`
 }
 
+// Job
 type Job[T JobArgs] struct {
-	Args   T                      `json:"args,omitempty"`
 	Meta   JobMeta                `json:"meta,omitempty"`
+	Args   T                      `json:"args,omitempty"`
 	Result map[string]interface{} `json:"result,omitempty"`
 }

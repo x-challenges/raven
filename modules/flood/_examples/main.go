@@ -61,9 +61,10 @@ type TestWorker struct {
 	flood.WorkerCronDefaults[TestArgs] // worker is periodic job
 }
 
-var _ flood.Worker[TestArgs] = (*TestWorker)(nil)
-
-var _ flood.WorkerCron[TestArgs] = (*TestWorker)(nil)
+var (
+	_ flood.Worker[TestArgs]     = (*TestWorker)(nil)
+	_ flood.WorkerCron[TestArgs] = (*TestWorker)(nil)
+)
 
 func NewTestWorker(logger *zap.Logger) *TestWorker {
 	return &TestWorker{
@@ -74,9 +75,12 @@ func NewTestWorker(logger *zap.Logger) *TestWorker {
 func (w *TestWorker) Queue(*flood.Job[TestArgs]) string { return "test" }
 func (w *TestWorker) Group(*flood.Job[TestArgs]) string { return "test" }
 func (w *TestWorker) MaxRetry(*flood.Job[TestArgs]) int { return 1 }
+func (w *TestWorker) Cronspec() string                  { return "@every 5s" }
+func (w *TestWorker) ErrorHandler(_ context.Context, _ *flood.Job[TestArgs], err error) {
+	w.logger.Fatal("test", zap.Error(err))
+}
 
-func (w *TestWorker) Cronspec() string { return "@every 5s" }
-
+// Work implements flood.Worker interface
 func (w *TestWorker) Work(_ context.Context, _ *flood.Job[TestArgs]) error {
 	return nil
 }

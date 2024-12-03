@@ -2,6 +2,7 @@ package flood
 
 import "time"
 
+// Result
 type Result[T any] struct {
 	// ID
 	ID string `json:"id"`

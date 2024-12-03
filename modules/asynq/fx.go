@@ -48,8 +48,10 @@ func Module(server, scheduler bool) fx.Option {
 
 		config.Inject(new(Config)),
 
+		// public usage
 		fx.Provide(
 			NewClient,
+			NewErrorHandlers,
 		),
 
 		fx.Options(fxOptions...),
