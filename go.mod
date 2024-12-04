@@ -1,27 +1,27 @@
 module github.com/x-challenges/raven
 
-go 1.23.3
+go 1.23.4
 
 godebug gotypesalias=1
 
 replace github.com/imdario/mergo => dario.cat/mergo v1.0.0
 
 require (
-	github.com/99designs/gqlgen v0.17.56
+	github.com/99designs/gqlgen v0.17.57
 	github.com/BurntSushi/toml v1.4.0
 	github.com/TheZeroSlave/zapsentry v1.23.0
-	github.com/aws/aws-sdk-go-v2 v1.32.5
-	github.com/aws/aws-sdk-go-v2/config v1.28.5
-	github.com/aws/aws-sdk-go-v2/service/sqs v1.37.1
+	github.com/aws/aws-sdk-go-v2 v1.32.6
+	github.com/aws/aws-sdk-go-v2/config v1.28.6
+	github.com/aws/aws-sdk-go-v2/service/sqs v1.37.2
 	github.com/eko/gocache/lib/v4 v4.1.6
 	github.com/eko/gocache/store/go_cache/v4 v4.2.2
 	github.com/eko/gocache/store/redis/v4 v4.2.2
-	github.com/getsentry/sentry-go v0.29.1
+	github.com/getsentry/sentry-go v0.30.0
 	github.com/go-playground/locales v0.14.1
 	github.com/go-playground/universal-translator v0.18.1
 	github.com/go-playground/validator/v10 v10.23.0
 	github.com/go-redis/redis_rate/v10 v10.0.1
-	github.com/go-resty/resty/v2 v2.16.1
+	github.com/go-resty/resty/v2 v2.16.2
 	github.com/google/uuid v1.6.0
 	github.com/graph-gophers/dataloader v5.0.0+incompatible
 	github.com/hibiken/asynq v0.25.0
@@ -37,10 +37,10 @@ require (
 	github.com/redis/go-redis/v9 v9.7.0
 	github.com/shopspring/decimal v1.4.0
 	github.com/spf13/viper v1.19.0
-	github.com/vektah/gqlparser/v2 v2.5.19
+	github.com/vektah/gqlparser/v2 v2.5.20
 	github.com/ydb-platform/gorm-driver v0.2.0
 	github.com/ydb-platform/ydb-go-sdk-auth-environ v0.5.0
-	github.com/ydb-platform/ydb-go-sdk/v3 v3.92.6
+	github.com/ydb-platform/ydb-go-sdk/v3 v3.93.1
 	go.uber.org/fx v1.23.0
 	go.uber.org/zap v1.27.0
 	golang.org/x/exp v0.0.0-20241108190413-2d47ceb2692f
@@ -49,16 +49,16 @@ require (
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/credentials v1.17.46 // indirect
-	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.20 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.24 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.24 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.47 // indirect
+	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.21 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.25 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.25 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.12.1 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.12.5 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sso v1.24.6 // indirect
-	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.28.5 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sts v1.33.1 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.12.6 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sso v1.24.7 // indirect
+	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.28.6 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sts v1.33.2 // indirect
 	github.com/aws/smithy-go v1.22.1 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
@@ -90,14 +90,14 @@ require (
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
-	github.com/yandex-cloud/go-genproto v0.0.0-20241114125552-204702d61ed0 // indirect
+	github.com/yandex-cloud/go-genproto v0.0.0-20241202160409-e71211db0fd5 // indirect
 	github.com/ydb-platform/ydb-go-genproto v0.0.0-20241112172322-ea1f63298f77 // indirect
 	github.com/ydb-platform/ydb-go-yc v0.12.3 // indirect
 	github.com/ydb-platform/ydb-go-yc-metadata v0.6.1 // indirect
 	go.uber.org/dig v1.18.0 // indirect
-	golang.org/x/sync v0.9.0 // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20241118233622-e639e219e697 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20241118233622-e639e219e697 // indirect
+	golang.org/x/sync v0.10.0 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20241202173237-19429a94021a // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20241202173237-19429a94021a // indirect
 	google.golang.org/grpc v1.68.0 // indirect
 	google.golang.org/protobuf v1.35.2 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
@@ -121,7 +121,7 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/crypto v0.29.0 // indirect
 	golang.org/x/net v0.31.0 // indirect
-	golang.org/x/sys v0.27.0 // indirect
+	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/time v0.8.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 )

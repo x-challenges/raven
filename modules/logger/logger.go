@@ -61,6 +61,10 @@ func NewLogger(p FxLoggerParam) (*zap.Logger, error) {
 		)
 	}
 
-	return zap.New(
-		zapcore.NewTee(append(p.Cores, core)...), opts...), nil
+	var logger = zap.New(
+		zapcore.NewTee(append(p.Cores, core)...), opts...)
+
+	zap.ReplaceGlobals(logger)
+
+	return logger, nil
 }
