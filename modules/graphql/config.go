@@ -17,8 +17,9 @@ type Config struct {
 		} `mapstructure:"query"`
 
 		Playground struct {
-			Enabled bool   `mapstructure:"enabled"`
-			Path    string `mapstructure:"path" validate:"required" default:"/playground"`
+			Enabled   bool   `mapstructure:"enabled"`
+			Path      string `mapstructure:"path" validate:"required" default:"/playground"`
+			QueryPath string `mapstructure:"query_path" validate:"required" default:"/graphql"`
 		} `mapstructure:"playground"`
 
 		Websocket struct {
