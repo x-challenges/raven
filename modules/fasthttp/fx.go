@@ -12,6 +12,11 @@ const ModuleName = "fasthttp"
 var Module = fx.Module(
 	ModuleName,
 
+	// public usage
+	fx.Provide(
+		NewClient,
+	),
+
 	fx.Decorate(
 		func(logger *zap.Logger) *zap.Logger { return logger.Named(ModuleName) },
 	),
