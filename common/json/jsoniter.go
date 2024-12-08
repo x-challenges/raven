@@ -7,6 +7,7 @@ var json = jsoniter.ConfigCompatibleWithStandardLibrary
 // aliases
 var (
 	NewEncoder          = json.NewEncoder
+	NewDecoder          = json.NewDecoder
 	Marshal             = json.Marshal
 	MarshalToString     = json.MarshalToString
 	Unmarshal           = json.Unmarshal
