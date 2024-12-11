@@ -32,39 +32,41 @@ func New[T any]() *broadcaster[T] {
 	return &broadcaster[T]{
 		stopCh:    make(chan struct{}),
 		publishCh: make(chan T, 1),
-		subCh:     make(chan chan T, 1),
-		unsubCh:   make(chan chan T, 1),
+		subCh:     make(chan chan T, 10),
+		unsubCh:   make(chan chan T, 10),
 	}
 }
 
 // Start
 func (b *broadcaster[T]) Start(context.Context) {
-	subs := map[chan T]struct{}{}
+	go func() {
+		subs := map[chan T]struct{}{}
 
-	for {
-		select {
-		case <-b.stopCh:
-			return
+		for {
+			select {
+			case <-b.stopCh:
+				return
 
-		// subscribe
-		case msgCh := <-b.subCh:
-			subs[msgCh] = struct{}{}
+			// subscribe
+			case msgCh := <-b.subCh:
+				subs[msgCh] = struct{}{}
 
-		// unsubscribe
-		case msgCh := <-b.unsubCh:
-			delete(subs, msgCh)
+			// unsubscribe
+			case msgCh := <-b.unsubCh:
+				delete(subs, msgCh)
 
-		// broadcast
-		case msg := <-b.publishCh:
-			for msgCh := range subs {
-				// msgCh is buffered, use non-blocking send to protect the broker:
-				select {
-				case msgCh <- msg:
-				default:
+			// broadcast
+			case msg := <-b.publishCh:
+				for msgCh := range subs {
+					// msgCh is buffered, use non-blocking send to protect the broker:
+					select {
+					case msgCh <- msg:
+					default:
+					}
 				}
 			}
 		}
-	}
+	}()
 }
 
 // Stop
