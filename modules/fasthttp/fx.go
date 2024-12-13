@@ -19,6 +19,13 @@ var Module = fx.Module(
 	// public usage
 	fx.Provide(
 		NewClient,
+		NewPipelineClient,
+	),
+
+	// private usage
+	fx.Provide(
+		fx.Private,
+		NewLoggerAdapter,
 	),
 
 	fx.Decorate(
