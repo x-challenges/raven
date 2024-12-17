@@ -9,3 +9,8 @@ var (
 	AcquireResponse = fasthttp.AcquireResponse
 	ReleaseResponse = fasthttp.ReleaseResponse
 )
+
+type (
+	Request  = fasthttp.Request
+	Response = fasthttp.Response
+)
