@@ -6,6 +6,7 @@ import (
 
 	"github.com/x-challenges/raven/modules/monitoring/metrics"
 	"github.com/x-challenges/raven/modules/monitoring/sentry"
+	"github.com/x-challenges/raven/modules/monitoring/tracing"
 )
 
 // ModuleName
@@ -17,6 +18,7 @@ var Module = fx.Module(
 
 	sentry.Module,
 	metrics.Module,
+	tracing.Module,
 
 	fx.Decorate(
 		func(logger *zap.Logger) *zap.Logger { return logger.Named(ModuleName) },
