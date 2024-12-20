@@ -3,6 +3,7 @@ package tracing
 import (
 	"context"
 
+	"go.opentelemetry.io/contrib/propagators/aws/xray"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
 	"go.opentelemetry.io/otel/sdk/resource"
@@ -38,6 +39,7 @@ func InvokeTraceProvider(config *Config) error {
 		)),
 		trace.WithSpanProcessor(spanProcessor),
 		trace.WithSampler(trace.AlwaysSample()),
+		trace.WithIDGenerator(xray.NewIDGenerator()),
 	)
 
 	// register trace provider
