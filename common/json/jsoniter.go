@@ -1,6 +1,10 @@
 package json
 
-import jsoniter "github.com/json-iterator/go"
+import (
+	jsonstd "encoding/json"
+
+	jsoniter "github.com/json-iterator/go"
+)
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
@@ -12,4 +16,8 @@ var (
 	MarshalToString     = json.MarshalToString
 	Unmarshal           = json.Unmarshal
 	UnmarshalFromString = json.UnmarshalFromString
+)
+
+type (
+	RawMessage = jsonstd.RawMessage
 )
