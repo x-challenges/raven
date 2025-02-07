@@ -15,6 +15,7 @@ func NewClient(config *Config) *Client {
 		MaxConnsPerHost:               cfg.MaxConnsPerHost,
 		MaxConnDuration:               cfg.MaxConnDuration,
 		MaxConnWaitTimeout:            cfg.MaxConnWaitTimeout,
+		MaxIdleConnDuration:           cfg.MaxIdleConnDuration,
 		ReadTimeout:                   cfg.ReadTimeout,
 		WriteTimeout:                  cfg.WriteTimeout,
 		ReadBufferSize:                cfg.ReadBufferSize,
