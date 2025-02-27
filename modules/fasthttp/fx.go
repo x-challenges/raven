@@ -18,13 +18,18 @@ var Module = fx.Module(
 
 	// public usage
 	fx.Provide(
+		// Client
 		NewClient,
-		NewPipelineClient,
+
+		// Factory
+		fx.Annotate(NewFactory, fx.As(new(Factory))),
 	),
 
 	// private usage
 	fx.Provide(
 		fx.Private,
+
+		// LoggerAdapter
 		NewLoggerAdapter,
 	),
 
