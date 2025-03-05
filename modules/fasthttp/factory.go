@@ -3,10 +3,12 @@ package fasthttp
 import (
 	"fmt"
 	"net/url"
+	"time"
 
 	"github.com/valyala/fasthttp"
 	"github.com/valyala/fasthttp/fasthttpproxy"
 	"go.uber.org/zap"
+	"golang.org/x/net/http/httpproxy"
 )
 
 // Factory
@@ -50,7 +52,21 @@ func (f *factory) Client(opts ...FactoryOptionFunc) *Client {
 
 	// init proxy dialer if enabled
 	if proxy := options.Proxy; proxy != "" {
-		dialer = fasthttpproxy.FasthttpHTTPDialerTimeout(proxy, cfg.ReadTimeout)
+		d := fasthttpproxy.Dialer{
+			Config:         httpproxy.Config{HTTPProxy: proxy, HTTPSProxy: proxy},
+			Timeout:        cfg.ReadTimeout,
+			ConnectTimeout: cfg.ReadTimeout,
+			TCPDialer: fasthttp.TCPDialer{
+				Concurrency:      4096,
+				DNSCacheDuration: time.Hour,
+			},
+		}
+		dialer, _ = d.GetDialFunc(false)
+	} else {
+		dialer = (&fasthttp.TCPDialer{
+			Concurrency:      4096,
+			DNSCacheDuration: time.Hour,
+		}).Dial
 	}
 
 	// new fast http client
@@ -81,7 +97,9 @@ func (f *factory) Client(opts ...FactoryOptionFunc) *Client {
 func (f *factory) PipelineClient(addr string, opts ...FactoryOptionFunc) *fasthttp.PipelineClient {
 	var (
 		options = NewFactoryOptions().Apply(opts...)
+		u       *url.URL
 		dialer  fasthttp.DialFunc
+		err     error
 	)
 
 	// set default config
@@ -93,11 +111,25 @@ func (f *factory) PipelineClient(addr string, opts ...FactoryOptionFunc) *fastht
 
 	// init proxy dialer if enabled
 	if proxy := options.Proxy; proxy != "" {
-		dialer = fasthttpproxy.FasthttpHTTPDialerTimeout(proxy, cfg.ReadTimeout)
+		d := fasthttpproxy.Dialer{
+			Config:         httpproxy.Config{HTTPProxy: proxy, HTTPSProxy: proxy},
+			Timeout:        cfg.ReadTimeout,
+			ConnectTimeout: cfg.ReadTimeout,
+			TCPDialer: fasthttp.TCPDialer{
+				Concurrency:      4096,
+				DNSCacheDuration: time.Hour,
+			},
+		}
+		dialer, _ = d.GetDialFunc(false)
+	} else {
+		dialer = (&fasthttp.TCPDialer{
+			Concurrency:      4096,
+			DNSCacheDuration: time.Hour,
+		}).Dial
 	}
 
-	u, err := url.Parse(addr)
-	if err != nil {
+	// parse url
+	if u, err = url.Parse(addr); err != nil {
 		f.logger.Fatal("cant parse uri", zap.Error(err))
 	}
 
