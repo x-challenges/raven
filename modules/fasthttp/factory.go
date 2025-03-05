@@ -59,7 +59,6 @@ func (f *factory) Client(opts ...FactoryOptionFunc) *Client {
 		MaxConnDuration:               cfg.MaxConnDuration,
 		MaxConnWaitTimeout:            cfg.MaxConnWaitTimeout,
 		MaxIdleConnDuration:           cfg.MaxIdleConnDuration,
-		MaxIdemponentCallAttempts:     cfg.MaxIdemponentCallAttempts,
 		ReadTimeout:                   cfg.ReadTimeout,
 		WriteTimeout:                  cfg.WriteTimeout,
 		ReadBufferSize:                cfg.ReadBufferSize,
@@ -69,6 +68,10 @@ func (f *factory) Client(opts ...FactoryOptionFunc) *Client {
 		DisablePathNormalizing:        true,
 		DialDualStack:                 true,
 		Dial:                          dialer,
+		MaxIdemponentCallAttempts:     1,
+		RetryIf: func(_ *fasthttp.Request) bool {
+			return false // Disable automatic retries for GET/PATCH/PUT
+		},
 	}
 
 	return client
