@@ -8,8 +8,11 @@ import (
 
 // Factory
 type Factory interface {
-	// New
-	New(opts ...FactoryOptionFunc) *Client
+	// Client
+	Client(opts ...FactoryOptionFunc) *Client
+
+	// PipelineClient
+	PipelineClient(opts ...FactoryOptionFunc) *Client
 }
 
 // Factory interface implementation
@@ -29,7 +32,7 @@ func NewFactory(logger *zap.Logger, config *Config) (*factory, error) {
 }
 
 // New implements Factory interface
-func (f *factory) New(opts ...FactoryOptionFunc) *Client {
+func (f *factory) Client(opts ...FactoryOptionFunc) *Client {
 	var (
 		options = NewFactoryOptions().Apply(opts...)
 		dialer  fasthttp.DialFunc
@@ -42,7 +45,7 @@ func (f *factory) New(opts ...FactoryOptionFunc) *Client {
 
 	var cfg = options.Config.FastHTTP.Client.Host
 
-	// init proxy dialer if endabled
+	// init proxy dialer if enabled
 	if proxy := options.Proxy; proxy != "" {
 		dialer = fasthttpproxy.FasthttpHTTPDialerTimeout(proxy, cfg.ReadTimeout)
 	}
@@ -53,6 +56,7 @@ func (f *factory) New(opts ...FactoryOptionFunc) *Client {
 		MaxConnDuration:               cfg.MaxConnDuration,
 		MaxConnWaitTimeout:            cfg.MaxConnWaitTimeout,
 		MaxIdleConnDuration:           cfg.MaxIdleConnDuration,
+		MaxIdemponentCallAttempts:     cfg.MaxIdemponentCallAttempts,
 		ReadTimeout:                   cfg.ReadTimeout,
 		WriteTimeout:                  cfg.WriteTimeout,
 		ReadBufferSize:                cfg.ReadBufferSize,
@@ -65,6 +69,11 @@ func (f *factory) New(opts ...FactoryOptionFunc) *Client {
 	}
 
 	return client
+}
+
+// PipelineClient implements Factory interface
+func (f *factory) PipelineClient(opts ...FactoryOptionFunc) *Client {
+	return nil
 }
 
 // FactoryOptions

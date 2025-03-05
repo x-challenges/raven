@@ -9,5 +9,5 @@ type Client = fasthttp.Client
 
 // NewClient
 func NewClient(factory Factory) *Client {
-	return factory.New()
+	return factory.Client()
 }
