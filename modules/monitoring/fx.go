@@ -5,6 +5,7 @@ import (
 	"go.uber.org/zap"
 
 	"github.com/x-challenges/raven/modules/monitoring/metrics"
+	"github.com/x-challenges/raven/modules/monitoring/pprof"
 	"github.com/x-challenges/raven/modules/monitoring/sentry"
 	"github.com/x-challenges/raven/modules/monitoring/tracing"
 )
@@ -19,6 +20,7 @@ var Module = fx.Module(
 	sentry.Module,
 	metrics.Module,
 	tracing.Module,
+	pprof.Module,
 
 	fx.Decorate(
 		func(logger *zap.Logger) *zap.Logger { return logger.Named(ModuleName) },
